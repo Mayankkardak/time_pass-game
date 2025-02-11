@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Water Gun Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+            background: white;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .buttons button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            
+        }
+
+        button:hover {
+            opacity: 0.8;
+            background-color: rgb(148, 148, 148);
+            
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Snake-Water-Gun Game</h1>
+        <p>Choose your move:</p>
+        <div class="buttons">
+            <button onclick="playGame('s')">🐍 Snake</button>
+            <button onclick="playGame('w')">💧 Water</button>
+            <button onclick="playGame('g')">🔫 Gun</button>
+        </div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function playGame(userChoice) {
+            let choices = { 's': "Snake", 'w': "Water", 'g': "Gun" };
+            let computerChoice = ['s', 'w', 'g'][Math.floor(Math.random() * 3)];
+            
+            let result = "";
+            
+            if (userChoice === computerChoice) {
+                result = "It's a Draw!";
+            } else if (
+                (userChoice === 's' && computerChoice === 'g') ||
+                (userChoice === 'g' && computerChoice === 'w') ||
+                (userChoice === 'w' && computerChoice === 's')
+            ) {
+                result = "You Lose! 😞";
+            } else {
+                result = "You Win! 🎉";
+            }
+            
+            document.getElementById("result").innerHTML = `
+                <p>You chose: <strong>${choices[userChoice]}</strong></p>
+                <p>Computer chose: <strong>${choices[computerChoice]}</strong></p>
+                <p>${result}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
